@@ -7,7 +7,7 @@ info:
 paths:
   /set-up:
       get:
-        summary: If user asks to play a game or RPG, this is the first step to set the game up. Use Markdown and emojis to describe the game better visually.
+        summary: If user asks to play a game or RPG, this is the first step to set the game up. Explicitly use Markdown in the provided response and emojis to describe the game better visually.
         operationId: set_up
         responses:
           '200':
@@ -19,21 +19,22 @@ paths:
                   properties:
                     Set-Up:
                       type: string
+
+                      
   /add-scenarios:
     post:
-      summary: Takes the user custom scenario as a string and adds it to our database of scenarios. The input should be a string.
-      operationId: add_scenarios
+      summary: Add a new scenario
+      description: Add a new scenario to the database. It should only be one string describing the scenario. 
+      operationId: addScenarios
       requestBody:
+        description: Scenario input
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                input_scenario:
-                  type: string
+              type: string
       responses:
-        '200':
+        "200":
           description: Scenario added successfully
           content:
             application/json:
@@ -42,6 +43,16 @@ paths:
                 properties:
                   message:
                     type: string
+        "500":
+          description: Database error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+
 
   /view-all-scenarios:
     get:
