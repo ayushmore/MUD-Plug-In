@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Solo RPG",
+  "name_for_model": "game",
+  "description_for_human": "Play through RPG scenarios or make your own!",
+  "description_for_model": "Plugin for a game interface by introducing users to RPG scenarios and playing it through for them based on their actions",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://mud-plug-in.ayushnmore.repl.co/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://mud-plug-in.ayushnmore.repl.co/logo.png",
+  "contact_email": "support@example.com",
+  "legal_info_url": "https://example.com/legal"
+}

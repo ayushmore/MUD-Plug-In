@@ -1,0 +1,135 @@
+openapi: 3.0.1
+info:
+  title: Scenarios API
+  description: An API for managing scenarios in a SQLite database.
+  version: 'v1'
+
+paths:
+  /set-up:
+      get:
+        summary: If user asks to play a game or RPG, this is the first step to set the game up. Use Markdown and emojis to describe the game better visually.
+        operationId: set_up
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    Set-Up:
+                      type: string
+  /add-scenarios:
+    post:
+      summary: Takes the user custom scenario as a string and adds it to our database of scenarios. The input should be a string.
+      operationId: add_scenarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input_scenario:
+                  type: string
+      responses:
+        '200':
+          description: Scenario added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /view-all-scenarios:
+    get:
+      summary: Shows all the scenarios in our database neatly in an entertaining manner in Markdown and emojis.
+      operationId: view_all_scenarios  
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scenarios:
+                    type: array
+                    items:
+                      type: string
+
+  /view-scenario/{id}:
+    get:
+      summary: Shows a specific scenario in our database neatly in an entertaining manner in Markdown and emojis.
+      operationId: view_scenario
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scenario:
+                    type: string
+        '404':
+          description: Scenario not found
+
+  /update-scenario/{scenario_id}:
+    put:
+      summary: Updates a scenario in the database.
+      operationId: update_scenario
+      parameters:
+        - in: path
+          name: scenario_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scenario_title:
+                  type: string
+      responses:
+        '200':
+          description: Scenario updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /delete-scenario/{scenario_id}:
+    delete:
+      summary: Deletes a scenario from the database.
+      operationId: delete_scenario
+      parameters:
+        - in: path
+          name: scenario_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Scenario deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
